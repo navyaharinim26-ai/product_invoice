@@ -2,10 +2,19 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven-3.9.16'
+    }
+
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                echo'Source code cjeckout completed'
+                checkout scm
+                echo 'Source code checkout completed'
             }
         }
 
@@ -21,10 +30,21 @@ pipeline {
             }
         }
 
-        stage('Package') {
+        stage('Archive Artifacts') {
             steps {
-                bat 'mvn package'
+                bat 'mvn package -DskipTests'
+                archiveArtifacts artifacts: 'target/*.jar',
+                                 allowEmptyArchive: false
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the Console Output.'
         }
     }
 }
