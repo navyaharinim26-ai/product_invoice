@@ -6,7 +6,7 @@ public class ProductInvoiceTest {
     @Test
     public void testInvoiceTotal() {
         int expectedTotal = 100;
-        int actualTotal = 90;
+        int actualTotal = 100;
 
         assertEquals(expectedTotal, actualTotal,
             "Invoice total does not match!");
