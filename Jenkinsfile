@@ -2,15 +2,10 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-        jdk 'JDK'
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                echo'Source code cjeckout completed'
             }
         }
 
@@ -26,11 +21,9 @@ pipeline {
             }
         }
 
-        stage('Archive Artifacts') {
+        stage('Package') {
             steps {
-                bat 'mvn package -DskipTests'
-                archiveArtifacts artifacts: 'target/*.jar',
-                                 allowEmptyArchive: false
+                bat 'mvn package'
             }
         }
     }
