@@ -37,10 +37,4 @@ public class InvoiceCalculatorTest {
     void testFinalAmount() {
         assertEquals(5310, invoice.calculateFinalAmount(5000));
     }
-
-    @Test
-    void testFinalAmountFailureCase() {
-        // Renamed from testFinalAmount to avoid duplicate compilation error
-        assertEquals(9999, invoice.calculateFinalAmount(5000));
-    }
 }
